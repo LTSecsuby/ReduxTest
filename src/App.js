@@ -1,24 +1,30 @@
 import React from 'react';
-import logo from './logo.svg';
+import Posts from "./Posts";
 import './App.css';
 
-function App() {
+let actionTextPost = {
+  type: 'TEXT_POST',
+  msg: ''
+};
+
+let actionAddPost = {
+  type: 'ADD_POST'
+};
+
+function App(props) {
+
+  function onSetTextPost(e) {
+    actionTextPost.msg = e.target.value;
+    props.store.dispatch(actionTextPost);
+  }
+
+  function onAddPost() {
+    props.store.dispatch(actionAddPost)
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <Posts state={props.state} onSetTextPost={onSetTextPost} onAddPost={onAddPost}/>
     </div>
   );
 }
