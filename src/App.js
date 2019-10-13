@@ -1,32 +1,36 @@
-import React from 'react';
 import Posts from "./Posts";
 import './App.css';
+import {connect} from "react-redux";
 
 let actionTextPost = {
-  type: 'TEXT_POST',
-  msg: ''
+    type: 'TEXT_POST',
+    msg: ''
 };
 
 let actionAddPost = {
-  type: 'ADD_POST'
+    type: 'ADD_POST'
 };
 
-function App(props) {
 
-  function onSetTextPost(e) {
-    actionTextPost.msg = e.target.value;
-    props.store.dispatch(actionTextPost);
-  }
+let mapStateToProps = (state) => {
+    return {
+        state: state
+    }
+};
 
-  function onAddPost() {
-    props.store.dispatch(actionAddPost)
-  }
+let mapDispatchToProps = (dispatch) => {
+    return {
+        onSetTextPost: (e) => {
+            actionTextPost.msg = e.target.value;
+            dispatch(actionTextPost);
+        },
+        onAddPost: () => {
+            dispatch(actionAddPost)
+        }
+    }
 
-  return (
-    <div className="App">
-        <Posts state={props.state} onSetTextPost={onSetTextPost} onAddPost={onAddPost}/>
-    </div>
-  );
-}
+};
+
+const App = connect(mapStateToProps, mapDispatchToProps)(Posts);
 
 export default App;

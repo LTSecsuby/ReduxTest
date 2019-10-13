@@ -5,24 +5,23 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {createStore} from "redux";
 import {Reducer} from "./Reducer";
+import {Provider} from "react-redux";
+
 
 let initialState = {
-  text: '',
-  posts: []
+    text: '',
+    posts: []
 };
 
 let store = createStore(Reducer, initialState);
 
-function RenderApp(state) {
-    ReactDOM.render(<App store={store} state={state}/>, document.getElementById('root'));
-}
 
-RenderApp(store.getState());
+ReactDOM.render(
+    <Provider store={store}>
+        <App/>
+    </Provider>
+    , document.getElementById('root'));
 
-store.subscribe(() =>{
-   let state = store.getState();
-   RenderApp(state);
-});
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

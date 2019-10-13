@@ -8,15 +8,17 @@ let actionAddPost = {
 };
 
 export const Reducer = (state, action) => {
+    let newState = {...state};
 
     switch (action.type) {
         case actionAddPost.type:
-            console.log("sds");
-            state.posts.push({msg: state.text});
-            return state;
+            newState.posts = [...state.posts];
+            newState.posts.push({msg: state.text});
+            newState.text = '';
+            return newState;
         case actionTextPost.type:
-            state.text = action.msg;
-            return state;
+            newState.text = action.msg;
+            return newState;
         default:
             return state;
     }
