@@ -1,36 +1,35 @@
-import Posts from "./Posts";
 import './App.css';
 import {connect} from "react-redux";
+import Post from "./Post";
 
-let actionTextPost = {
-    type: 'TEXT_POST',
-    msg: ''
+let actionSetTextPost = {
+  type: 'TEXT_POST',
+  msg: ''
 };
 
 let actionAddPost = {
-    type: 'ADD_POST'
+  type: 'ADD_POST'
 };
 
 
 let mapStateToProps = (state) => {
-    return {
-        state: state
-    }
+  return {
+      postsPage: state.postsPage
+  }
 };
 
 let mapDispatchToProps = (dispatch) => {
-    return {
-        onSetTextPost: (e) => {
-            actionTextPost.msg = e.target.value;
-            dispatch(actionTextPost);
-        },
-        onAddPost: () => {
-            dispatch(actionAddPost)
-        }
+  return {
+    onSetPostText: (e) => {
+      actionSetTextPost.msg = e.target.value;
+      dispatch(actionSetTextPost);
+    },
+    onAddPost: () => {
+      dispatch(actionAddPost);
     }
-
+  }
 };
 
-const App = connect(mapStateToProps, mapDispatchToProps)(Posts);
+const App = connect(mapStateToProps, mapDispatchToProps)(Post);
 
 export default App;
