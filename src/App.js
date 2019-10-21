@@ -14,7 +14,7 @@ let actionAddPost = {
 
 let mapStateToProps = (state) => {
   return {
-      postsPage: state.postsPage
+      postsPage: state.postsPageState.postsPage
   }
 };
 

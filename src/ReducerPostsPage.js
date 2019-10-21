@@ -7,7 +7,15 @@ let actionAddPost = {
     type: 'ADD_POST'
 };
 
-let ReducerPostsPage = (state, action) => {
+let initialState = {
+    postsPage: {
+        text: '',
+        posts: [],
+        idPostCurrent: 0
+    }
+};
+
+let ReducerPostsPage = (state = initialState, action) => {
 
     switch (action.type) {
         case actionSetTextPost.type:
@@ -19,7 +27,10 @@ let ReducerPostsPage = (state, action) => {
             let msgPost = state.postsPage.text;
             return {
                 ...state,
-                postsPage: { ...state.postsPage, text: '', posts: [...state.postsPage.posts, { msg: msgPost}] }
+                postsPage: { ...state.postsPage,
+                    text: '',
+                    idPostCurrent: state.postsPage.idPostCurrent + 1,
+                    posts: [...state.postsPage.posts, { id: state.postsPage.idPostCurrent, msg: msgPost}] }
             };
         default:
             return state;

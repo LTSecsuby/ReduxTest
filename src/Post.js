@@ -2,7 +2,7 @@ import React from 'react';
 
 const Post = (props) => {
 
-    let posts = props.postsPage.posts.map(m => <div>{m.msg}</div>
+    let posts = props.postsPage.posts.map(m => <div key={m.id}>{m.msg}</div>
     );
 
     return (

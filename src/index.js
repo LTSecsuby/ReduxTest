@@ -7,14 +7,13 @@ import {Provider} from 'react-redux';
 import {combineReducers, createStore} from 'redux';
 import ReducerPostsPage from "./ReducerPostsPage";
 
-let initialState = {
-postsPage: {
-    text: '',
-    posts: []
-}
-};
 
-let store = createStore(ReducerPostsPage, initialState);
+
+let  reducers = combineReducers(
+    {postsPageState: ReducerPostsPage}
+    );
+
+let store = createStore(reducers);
 
 ReactDOM.render(
     <Provider store={store}>
